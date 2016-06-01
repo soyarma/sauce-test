@@ -3,20 +3,20 @@ machine:
     version: 3.5.1
 
 dependencies:
-  post: 
+  pre: 
     - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
     - tar -xzf sc-latest-linux.tar.gz
     
 test:
   override:
+    - echo $SAUCE_ACCESS_KEY
+    - echo $SAUCE_USERNAME
     - cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY --readyfile ~/sauce_is_ready:
         background: true
     # Wait for tunnel to be ready
     - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
-    - python -m hello.hello_app:
-        background: true
     # Set the domain to test against 
-    - export DOCKER_WEB_IP 'dev.insuramatch.com'
+    - export DOCKER_WEB_IP='dev.insuramatch.com'
     # Run selenium tests
     - python tests/mass-quote-flow.py
   post:
