@@ -6,6 +6,8 @@ dependencies:
   pre: 
     - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
     - tar -xzf sc-latest-linux.tar.gz
+    - pip install selenium
+    - pip install sauceclient
     
 test:
   override:
@@ -18,6 +20,6 @@ test:
     # Set the domain to test against 
     - export DOCKER_WEB_IP='dev.insuramatch.com'
     # Run selenium tests
-    - python tests/mass-quote-flow.py
+    - python ~/sauce-test/tests/mass-quote-flow.py
   post:
     - killall --wait sc  # wait for Sauce Connect to close the tunnel
