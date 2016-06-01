@@ -18,7 +18,7 @@ test:
     # Wait for tunnel to be ready
     - while [ ! -e ~/sauce_is_ready ]; do sleep 1; done
     # Set the domain to test against 
-    - export DOCKER_WEB_IP='dev.insuramatch.com'
+    - export DOCKER_WEB_IP='stage.insuramatch.com'
     # Run selenium tests
     - python ~/sauce-test/tests/mass-quote-flow.py
   post:
